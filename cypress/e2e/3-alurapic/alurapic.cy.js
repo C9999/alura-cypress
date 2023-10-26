@@ -44,4 +44,16 @@ describe('Login e registro de usuário alura pic', () => {
          cy.contains('button', 'Register').click()
          cy.contains('ap-vmessage', "Full name is required!").should('be.visible')
      })
+
+     it('Fazer login de usuário válido', () => {
+         cy.login('flavio','123')
+         cy.contains('a', '(Logout)').should('be.visible');
+     })
+
+     it('Fazer login de usuário inválido', () => {
+         cy.login('jacquelide', '1234')
+         cy.on('window:alert', (srt) => {
+            expect(str).to.equal('Invalid user name or password')
+         })
+     })
 })
